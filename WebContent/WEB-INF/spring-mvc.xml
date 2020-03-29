@@ -27,4 +27,9 @@
 		<property name="contentType" value="text/html;charset=utf-8"></property>
 		<property name="order" value="0"/>
 	</bean>
+	<!-- ioc模拟 -->
+	<bean id="IOCtestServer" class="com.coffee.a6.IOCtestServer" init-method="start"> 
+		<property name="ip" value="127.0.0.1" />
+		<property name="port" value="2233" /> 
+	</bean>
 </beans>
