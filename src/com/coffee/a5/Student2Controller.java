@@ -167,7 +167,7 @@ public class Student2Controller
 	 * @return
 	 */
 	@GetMapping("/query5")
-	public String query5(Model model, int from, int to)
+	public String query5(HttpSession session,Model model, int from, int to)
 	{
 		List<Student> studentList = new ArrayList<Student>();			
 		for(Student s : DemoDB.list)
@@ -177,6 +177,7 @@ public class Student2Controller
 				studentList.add( s );
 			}
 		}
+		session.setAttribute("user", "刘伟");
 //		ModelAndView mv=new ModelAndView("query1");
 //		mv.addObject("studentList", studentList);
 //		return mv;
