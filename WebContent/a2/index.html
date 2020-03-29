@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>test.html</title>	
+    <meta charset='utf-8'>
+    
+    <link rel="stylesheet" href="../css/common.css" />
+    <script type="text/javascript" src="../js/jquery.js" ></script>
+
+	<style>
+		.main {
+			width: 500px;
+			margin: 20px auto auto auto;
+		}
+		
+		.main label{
+			display: inline-block;
+			min-width:70px;
+		}
+	</style>
+  </head>
+  
+  <body>
+    <div class='main'>
+    	<div class='row'>
+    		<label> 学号 </label>
+    		<input type='text' class='id' />
+    	</div>
+    	
+    	<div class='row'>
+    		<label> 姓名 </label>
+    		<input type='text' class='name' />
+    	</div>
+    	<div class='row'>
+    		<label> 性别 </label>
+    		<select class='sex'>
+    			<option value='false'> 女 </option>
+    			<option value='true'> 男 </option>
+    		</select>
+    	</div>
+    	<div class='row'>
+    		<label> 手机号  </label>
+    		<input type='text' class='phone' />
+    	</div>
+    	
+    	<div class='row'>
+    		<button onclick='M.save()'> 保存 </button>
+    	</div>
+    </div>
+  </body>
+  <script>
+  	var M = {}
+  	
+  	M.save = function(){
+  		// 取得用户的输入
+  		var req = {};
+  		req.id = Number( $('.id').val().trim());  // Number类型
+  		req.name = $('.name').val().trim();
+  		req.sex = $('.sex').val() == 'true';  // Boolean类型
+  		req.phone = $('.phone').val().trim();
+  		if(req.name.length==0) return;
+  		
+  		// 默认地 jquery 按表单格式上传数据
+  		jQuery.ajax({				
+			url: '../app/add', 			
+			method: "POST", 
+			data: req,        // 请求数据,由jquery自动转成表单格式
+			dataType: 'json', // 将应答数据转成json
+			success: function(ans){
+				alert('成功'+ans.error+ans.reason);
+			},
+			error: function( jqXHR, textStatus, errorThrown){
+				alert('出错');
+			}
+		});
+  	}
+  	
+  </script>
+</html>
