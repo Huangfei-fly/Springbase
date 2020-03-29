@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,10 +20,11 @@ import com.coffee.entity.Student;
  *
  */
 @RestController
+@RequestMapping("/stu")//共享前缀可以不加
 public class StudentController
 {
 	//get形式
-	//http://localhost:8080/Springbase/app/query?from=20200001&to=20200005
+	//http://localhost:8080/Springbase/stu/app/query?from=20200001&to=20200005
 	@GetMapping("/query")
 	public List<Student> query(Integer from, Integer to)
 	{
@@ -80,4 +82,6 @@ public class StudentController
 		result.put("reason", "OK"); // 错误描述
 		return result;
 	}
+	
+	
 }
