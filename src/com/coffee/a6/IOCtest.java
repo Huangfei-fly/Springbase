@@ -27,7 +27,7 @@ public class IOCtest
 	 * @return
 	 */
 	@GetMapping("/IOCtest")
-	public String test(HttpServletRequest request)
+	public void test(HttpServletRequest request)
 	{
 		WebApplicationContext ctx
 		= RequestContextUtils.findWebApplicationContext(request);
@@ -35,7 +35,7 @@ public class IOCtest
 //			getWebApplicationContext(request.getServletContext());
 		IOCtestServer iServer = ctx.getBean("IOCtestServer", IOCtestServer.class);
 		System.out.println(iServer.getIp()+iServer.getPort());
-		return null;
+		
 	}
 }
 
