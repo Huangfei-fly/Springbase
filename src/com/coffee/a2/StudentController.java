@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.coffee.entity.Student;
 /**
  * 
- * rest提交的三种形式
+ * rest风格交互三种形式
  * @author coffeeliu
  *
  */
@@ -40,7 +40,7 @@ public class StudentController
 		
 		return result;		
 	}
-	
+	//注解修饰参数
 	@GetMapping("/query1")
 	public List<Student> query1( @RequestParam("from") Integer n1
 			, @RequestParam("to") Integer n2)
@@ -69,14 +69,13 @@ public class StudentController
 		result.put("reason", "OK"); // 错误描述
 		return result;
 	}
-	//post json形式
+	//post+json形式
 	@PostMapping("/add2")
 	public Map add2( @RequestBody Student stu)
 	{
 		//Student stu = new Student(id,name,sex, phone);
 		DemoDB.list.add( stu );
 		System.out.println("添加了一条记录: " + stu.getName());
-		
 		Map<String,Object> result = new HashMap<String, Object>();
 		result.put("error", 0); // 错误码，0表示成功
 		result.put("reason", "OK"); // 错误描述

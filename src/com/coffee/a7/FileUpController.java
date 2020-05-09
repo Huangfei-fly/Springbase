@@ -17,6 +17,7 @@ public class FileUpController
 	/**
 	 * http://localhost:8080/Springbase/a6/upload.html
 	 * 无返回值自定义返回方式
+	 * 在<bean>中添加multipart支持
 	 * @param request
 	 * @param response
 	 * @throws Exception

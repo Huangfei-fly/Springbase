@@ -88,7 +88,7 @@ public class Student1Controller {
 	}
 
 	/**
-	 * 可变路径参数
+	 * url内包含参数
 	 * 
 	 * @param id
 	 * @return http://localhost:8080/Springbase/app/stu/20200001/info

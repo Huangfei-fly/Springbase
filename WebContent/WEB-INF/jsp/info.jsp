@@ -18,7 +18,7 @@
 <body>
 
   	<div style='width:500px;margin:40px auto auto auto' >
-    <div class='row'> info1</div>
+    <div class='row'> jsp解析</div>
   		<div class='row'> 学生信息 :</div>
     
     	<div class='row'> 学号: ${stu.id} </div>

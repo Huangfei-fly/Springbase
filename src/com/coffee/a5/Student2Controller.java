@@ -33,13 +33,13 @@ public class Student2Controller
 {
 	/**
 	 * MVC模式
-	 * http://localhost:8080/Springbase/app/stu/query3?from=20200001&to=20200005
+	 * http://localhost:8080/Springbase/app/stu/query.ftl?from=20200001&to=20200005
 	 * @param model
 	 * @param from
 	 * @param to
 	 * @return
 	 */
-	@GetMapping("/query3")
+	@GetMapping("/query.ftl")
 	public String query( Model model, int from, int to)
 	{
 		List<Student> studentList = new ArrayList<Student>();			
@@ -53,7 +53,7 @@ public class Student2Controller
 		
 		model.addAttribute("studentList", studentList);
 		
-		return "query"; // 模板路径 /WEB-INF/template/query.html
+		return "query.ftl"; // 模板路径 /WEB-INF/template/query.ftl
 	}
 	
 	/**
@@ -104,13 +104,14 @@ public class Student2Controller
 	}
 	
 	/**
-	 * http://localhost:8080/Springbase/app/stu/mvc/20200001/info
 	 * MVC出错跳转处理
+	 * http://localhost:8080/Springbase/app/stu/mvc/20200001/info.ftl
+	 * 
 	 * @param model
 	 * @param id
 	 * @return
 	 */
-	@GetMapping("/mvc/{id}/info")
+	@GetMapping("/mvc/{id}/info.ftl")
 	public String get( Model model, @PathVariable int id)
 	{
 		Student stu = null;
@@ -126,22 +127,22 @@ public class Student2Controller
 		if(stu == null) 
 		{
 			model.addAttribute("errMsg", "找不到记录, id=" + id);
-			return "error_404";
+			return "error_404.ftl";
 			//return "redirect:/a/some.html";
 			//return ResponseEntity.status(404).build();
 		}
 		model.addAttribute("stu", stu);
-		return "info";	
+		return "info.ftl";	
 	}	
 	
 	/**
-	 * http://localhost:8080/Springbase/app/stu/mvc/20200001/info1
+	 * http://localhost:8080/Springbase/app/stu/mvc/20200001/info.jsp
 	 * 使用配置文件加载多个ViewResolver
 	 * jsp文件自动解析测试
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping("/mvc/{id}/info1")
+	@RequestMapping("/mvc/{id}/info.jsp")
 	public ModelAndView  get1( @PathVariable int id)
 	{
 		Student stu = null;
@@ -153,20 +154,20 @@ public class Student2Controller
 				break;
 			}
 		}
-		ModelAndView mv=new ModelAndView("info1");
+		ModelAndView mv=new ModelAndView("info.jsp");
 		mv.addObject("stu", stu);
 		return mv;	
 	}
 	
 	/**
-	 * http://localhost:8080/Springbase/app/stu/query5?from=20200001&to=20200005
+	 * http://localhost:8080/Springbase/app/stu/query.jsp?from=20200001&to=20200005
 	 * jsp文件返回集合测试
 	 * 导入jstl-1.2 jar包
 	 * @param from
 	 * @param to
 	 * @return
 	 */
-	@GetMapping("/query5")
+	@GetMapping("/query.jsp")
 	public String query5(HttpSession session,Model model, int from, int to)
 	{
 		List<Student> studentList = new ArrayList<Student>();			
@@ -182,6 +183,6 @@ public class Student2Controller
 //		mv.addObject("studentList", studentList);
 //		return mv;
 		model.addAttribute("studentList", studentList);
-		return "query1"; // 模板路径 /WEB-INF/jsp/query1.jsp
+		return "query.jsp"; // 模板路径 /WEB-INF/jsp/query.jsp
 	}
 }

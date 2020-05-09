@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		
+		<script src="../js/jquery.js" th:src="@{/js/jquery.js}" ></script>
+		<link rel="stylesheet" href="../css/common.css" th:href="@{/css/common.css}" />
+		
+	</head>
+	<body>
+		<div class="container">
+			<div class="row" style="border:1px solid #ccc; padding:10px">
+				 共有学生: [[${total}]] 人， 查找的学号:  [[${id}]] 
+			</div>
+			
+			<div class="row">
+				<label> 学号 :</label>
+				<span th:text="${stu.id}"> 00000000 </span>
+			</div>
+
+			<div class="row">
+				<label> 姓名 :</label>
+				<span th:text="${stu.name}"> 无名 </span>
+			</div>
+
+			<div class="row">
+				<label> 性别 : </label>
+				<span th:text="${stu.sex?'男':'女'}"> N </span>
+			</div>
+			
+			<div class="row">
+				<label> 手机 : </label>
+				<span th:text="${stu.phone}"> 13811110000 </span>
+			</div>
+			
+									
+		</div>
+	</body>
+</html>

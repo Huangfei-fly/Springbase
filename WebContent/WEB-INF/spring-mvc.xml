@@ -11,26 +11,96 @@
 
 	<context:component-scan
 		base-package="com.coffee" />
-
-	<mvc:annotation-driven />
-	<!-- 解析器 -->
+<!-- 启用MVC注解支持 -->
+	<mvc:annotation-driven conversion-service="conversionService">
+	<mvc:message-converters>
+	        <bean class="org.springframework.http.converter.json.GsonHttpMessageConverter"/>
+	        <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"/>
+	    </mvc:message-converters>
+	</mvc:annotation-driven>
+	
+	<bean id="conversionService"
+            class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="com.coffee.a9.String2DateConverter"/>
+            </set>
+        </property>
+    </bean>
+    
+    
+	<!-- 解析器 原始版本
 	<bean id="jspViewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/"></property>
 		<property name="suffix" value=".jsp"></property>
 		<property name="order" value="1" />
 	</bean>
-	<!--MVC 添加 FreeMarker 支持 -->
+	-->
+	<!--MVC 添加 FreeMarker 支持 
 	<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
 		<property name="templateLoaderPath" value="/WEB-INF/template" />
 		<property name="defaultEncoding" value="utf-8"></property>
 	</bean>
+	-->
+	<!--  
 	<bean id="freeMarkerViewResolver"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
 		<property name="suffix" value=".html"></property>
 		<property name="contentType" value="text/html;charset=utf-8"></property>
 		<property name="order" value="0" />
+	</bean>
+	-->
+	<!-- 配置thymeleaf解析器 -->
+	<bean id="templateResolver"	class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
+		<property name="prefix" value="/WEB-INF/page/" />
+		<!-- <property name="suffix" value=".html" /> -->
+		<property name="templateMode" value="HTML" />
+		<property name="cacheable" value="false" />
+	</bean>
+ 
+	<bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+		<property name="templateResolver" ref="templateResolver" />
+		<!-- 使用Spring 4.2.4或更高版本启用Spring EL编译器 -->
+		<property name="enableSpringELCompiler" value="true" />
+	</bean>
+	
+		<!--配置freemarker视图解析器 -->
+	<bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath" value="/WEB-INF/template" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+	<!-- 配置多个视图解析 -->
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="viewResolvers">
+			<list>
+			<!-- used jsp -->
+				<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+					<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+					<property name="prefix" value="/WEB-INF/jsp/" /> 
+					<!-- <property name="suffix" value=".jsp"></property> -->
+					<property name="viewNames" value="*.jsp" />
+					<property name="order" value="0" />
+				</bean>
+				<!-- used freemarker -->
+			<bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+					<!-- <property name="prefix" value="/WEB-INF/template" /> -->
+					<!--<property name="suffix" value=".ftl" />-->
+					<property name="contentType" value="text/html; charset=UTF-8" />
+					<property name="viewNames" value="*.ftl" />
+					<property name="order" value="1" />
+				</bean>
+			<!--used thymeleaf -->
+				<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+					<property name="characterEncoding" value="UTF-8" />
+					<property name="templateEngine" ref="templateEngine" />
+					<property name="viewNames" value="*.html" />
+					<property name="order" value="2" />
+				</bean>
+			
+				</list>
+		</property>
 	</bean>
 		<!-- 文件上传支持 -->
 	<bean id="multipartResolver"
@@ -48,8 +118,14 @@
 		<property name="port" value="2233" />
 	</bean>
 
-	<!-- 静态文件 -->
+	<!-- 静态文件 http://localhost:8080/Springbase/app/res/1.png -->
 	<mvc:resources mapping="/res/**" location="/WEB-INF/res/" />
+	<mvc:resources mapping="/page/**" location="/WEB-INF/page/" />
+  	<!--全局实例  -->
+  	<bean id="demoDB" class="com.coffee.a6.DemoDB"></bean>
   	<!-- 初始化 -->
   	<bean class="com.coffee.a8.MyBatis" />
+  	<!-- 自定义异常处理 解析器 -->
+   	<bean class="com.coffee.a12.exception.ExceptionResolver" />
+   	<bean class="com.coffee.a14.util.myExceptionResolver" />
 </beans>

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.coffee.entity.Student;
 /**
+ * freemarker整合spring mvc
  * http://localhost:8080/Springbase/app/hellomvc
  * @author coffeeliu
  *
@@ -21,6 +22,6 @@ public class HelloMVCController
 		
 		model.addAttribute("stu", stu);
 				
-		return "hello"; // 最终合成路径 /WEB-INF/template/hello.html
+		return "hello.ftl"; // 最终合成路径 /WEB-INF/template/hello.ftl
 	}
 }

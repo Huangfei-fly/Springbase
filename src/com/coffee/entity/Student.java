@@ -1,11 +1,14 @@
 package com.coffee.entity;
 
+import java.util.Date;
+
 public class Student
 {
 	private int id;
 	private String name;
 	private boolean sex; 
 	private String phone;
+	private Date birthday;
 	
 	
 	public Student()
@@ -49,6 +52,12 @@ public class Student
 	public void setPhone(String phone)
 	{
 		this.phone = phone;
+	}
+	public Date getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(Date birthday) {
+		this.birthday =  birthday;
 	}
 	
 	

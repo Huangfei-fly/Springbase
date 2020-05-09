@@ -16,7 +16,7 @@ import com.google.gson.Gson;
  *多例模式@Scope("prototype")
  */
 @Controller 
-@Scope("prototype")
+@Scope("prototype")//启动多例模式
 public class Singleton
 {	
 

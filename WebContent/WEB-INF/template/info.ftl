@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>hello.html</title>
+    <title> 学生信息 </title>
 	
     <meta charset='utf-8'> 
 	
@@ -14,7 +14,7 @@
   
   <body>
   	<div style='width:500px;margin:40px auto auto auto' >
-    
+    <div class='row'> freemarker解析</div>
   		<div class='row'> 学生信息 :</div>
     
     	<div class='row'> 学号: ${stu.id?c} </div>

@@ -7,4 +7,7 @@
   <select id="getStudent" resultType="Student">
     select * from student 
   </select>
+   <select id="getStuById" resultType="Student">
+    select * from student where id = #{id}
+  </select>
 </mapper>

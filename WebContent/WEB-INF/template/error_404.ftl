@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+
     <title> 404,出错了!  </title>
 	
     <meta charset='utf-8'> 
@@ -21,9 +22,9 @@
 	</style>
   </head>
   
-  <body>
+  <body >
   	<div style='width:500px;margin:40px auto auto auto' >
-  		
+  		  <div class='heading'> freemarker解析</div>
     	<div class='heading'> 404, 出错了  !</div>
     	
     	<div class='detail'> ${errMsg} </div>

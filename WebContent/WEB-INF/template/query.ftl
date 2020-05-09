@@ -29,6 +29,7 @@
   <body>
   	<div style='width:500px;margin:40px auto auto auto' >
   	<div class='row'> 当前用户: ${Session.user !"未登录" }  </div>
+  	<div class='row'> freemarker解析</div>
   		<div class='row'> 查询结果 </div>
   		
     	<table>
